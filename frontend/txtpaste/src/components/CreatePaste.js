@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createPaste } from "../api";
+import "./CreatePaste.css";
 
 function CreatePaste() {
   const [content, setContent] = useState("");
@@ -9,11 +10,9 @@ function CreatePaste() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     setError("");
     setResult(null);
-
 
     try {
       const payload = {
@@ -33,54 +32,49 @@ function CreatePaste() {
   };
 
   return (
-    <div>
-      <h2>Create Paste</h2>
+    <div className="card">
+      <h2>Create a new paste</h2>
 
       <form onSubmit={handleSubmit}>
         <textarea
-          rows="6"
-          placeholder="Paste content..."
+          rows="7"
+          placeholder="Paste your text here..."
           value={content}
           onChange={(e) => setContent(e.target.value)}
           required
         />
 
-        <input
-          type="number"
-          min={1}
-          placeholder="TTL (seconds)"
-          value={ttl}
-          onChange={(e) => setTtl(e.target.value)}
-        />
+        <div className="row">
+          <input
+            type="number"
+            min="1"
+            placeholder="TTL (seconds)"
+            value={ttl}
+            onChange={(e) => setTtl(e.target.value)}
+          />
 
-        <input
-          type="number"
-          min={1}
-          placeholder="Max views"
-          value={views}
-          onChange={(e) => setViews(e.target.value)}
-        />
+          <input
+            type="number"
+            min="1"
+            placeholder="Max views"
+            value={views}
+            onChange={(e) => setViews(e.target.value)}
+          />
+        </div>
 
-        <button type="submit">Create</button>
+        <button type="submit">Create Paste</button>
       </form>
 
       {result && (
-        <p>
-          Share URL:{" "}
-          <a
-            href={result.url.replace(
-              window.location.origin,
-              "http://localhost:5000"
-            )}
-            target="_blank"
-            rel="noreferrer"
-          >
+        <div className="result">
+          <span>Share link:</span>
+          <a href={`/p/${result.id}`} target="_blank" rel="noreferrer">
             {window.location.origin + "/p/" + result.id}
           </a>
-        </p>
+        </div>
       )}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

@@ -1,10 +1,21 @@
 import CreatePaste from "./components/CreatePaste";
+import "./App.css";
 
 function App() {
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h1>Pastebin Lite</h1>
-      <CreatePaste />
+    <div className="app">
+      <header className="header">
+        <h1>PasteBin-Lite</h1>
+        <p>Share text instantly. Simple. Secure.</p>
+      </header>
+
+      <main className="main">
+        <CreatePaste />
+      </main>
+
+      <footer className="footer">
+        <span> &copy; 2026 - PasteBin-Lite</span>
+      </footer>
     </div>
   );
 }
