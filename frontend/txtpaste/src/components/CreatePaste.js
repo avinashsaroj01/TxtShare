@@ -9,9 +9,11 @@ function CreatePaste() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault();
     setError("");
     setResult(null);
+
 
     try {
       const payload = {
@@ -45,6 +47,7 @@ function CreatePaste() {
 
         <input
           type="number"
+          min={1}
           placeholder="TTL (seconds)"
           value={ttl}
           onChange={(e) => setTtl(e.target.value)}
@@ -52,6 +55,7 @@ function CreatePaste() {
 
         <input
           type="number"
+          min={1}
           placeholder="Max views"
           value={views}
           onChange={(e) => setViews(e.target.value)}
@@ -63,8 +67,15 @@ function CreatePaste() {
       {result && (
         <p>
           Share URL:{" "}
-          <a href={result.url} target="_blank" rel="noreferrer">
-            {result.url}
+          <a
+            href={result.url.replace(
+              window.location.origin,
+              "http://localhost:5000"
+            )}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {window.location.origin + "/p/" + result.id}
           </a>
         </p>
       )}
