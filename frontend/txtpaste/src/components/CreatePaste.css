@@ -74,3 +74,9 @@ button:hover {
   margin-top: 12px;
   color: #dc2626;
 }
+
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+}
