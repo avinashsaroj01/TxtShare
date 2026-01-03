@@ -1,5 +1,7 @@
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 export async function createPaste(payload) {
-  const res = await fetch("http://localhost:5000/api/pastes", {
+  const res = await fetch(`${API_BASE_URL}/api/pastes`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
